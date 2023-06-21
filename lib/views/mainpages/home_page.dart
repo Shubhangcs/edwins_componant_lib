@@ -1,5 +1,5 @@
-import 'package:edwins_componant_lib/views/componant_reg.dart';
-import 'package:edwins_componant_lib/views/os_page.dart';
+import 'package:edwins_componant_lib/views/mainpages/componant_reg.dart';
+import 'package:edwins_componant_lib/views/mainpages/os_page.dart';
 import 'package:edwins_componant_lib/widgets/card_model.dart';
 import 'package:edwins_componant_lib/widgets/top_menu.dart';
 import 'package:flutter/material.dart';

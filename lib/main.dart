@@ -1,6 +1,7 @@
+import 'package:edwins_componant_lib/widgets/comp_card_mod.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'views/home_page.dart';
+import 'views/mainpages/home_page.dart';
 
 void main() {
   runApp(const MyApp());
