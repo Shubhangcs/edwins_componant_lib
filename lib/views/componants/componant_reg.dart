@@ -1,5 +1,6 @@
-import 'package:edwins_componant_lib/views/subpages/componants_add.dart';
-import 'package:edwins_componant_lib/views/mainpages/home_page.dart';
+import 'package:edwins_componant_lib/views/operating_systems/os_page.dart';
+import 'package:edwins_componant_lib/views/componants/componants_add.dart';
+import 'package:edwins_componant_lib/views/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
@@ -96,32 +97,33 @@ class ComponantRegister extends StatelessWidget {
                             label: Text('Phone')),
                       ),
                     ),
-                    Container(
-                      margin:
-                          const EdgeInsets.only(top: 20, left: 20, right: 20),
-                      width: double.infinity,
-                      height: 65,
-                      decoration: BoxDecoration(
-                          border: Border.all(color: Colors.black),
-                          borderRadius: BorderRadius.circular(20),
-                          color: Colors.black),
-                      child: GestureDetector(
-                        child:const Center(
-                          child: Text(
-                            'Submit',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 17,
-                                fontWeight: FontWeight.w200,
-                                fontFamily: 'Quicksand',
-                                ),
+                    GestureDetector(
+                      child: Container(
+                        margin:
+                            const EdgeInsets.only(top: 20, left: 20, right: 20),
+                        width: double.infinity,
+                        height: 65,
+                        decoration: BoxDecoration(
+                            border: Border.all(color: Colors.black),
+                            borderRadius: BorderRadius.circular(20),
+                            color: Colors.black),
+                       
+                                  child: Center(
+                            child: Text(
+                              'Submit',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 17,
+                                  fontWeight: FontWeight.w200,
+                                  fontFamily: 'Quicksand',
+                                  ),
+                            ),
                           ),
                         ),
                         onTap: (){
                           Get.to(()=>const ComponantAdd());
                         },
-                      ),
-                    )
+                    ),
                   ],
                 ),
               ),

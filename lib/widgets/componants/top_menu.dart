@@ -16,37 +16,31 @@ class TopMenu extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
-                margin:const EdgeInsets.only(left: 15),
-                child: Column(
+                margin: const EdgeInsets.only(left: 15 , top: 20),
+                child: const Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    AnimatedTextKit(animatedTexts: [
-                      TyperAnimatedText('Welcome',
-                          textStyle: TextStyle(
-                              color: Colors.black,
-                              fontSize: 30,
-                              fontWeight: FontWeight.w200,
-                              fontFamily: 'Quicksand'))
-                    ]),
+                    
                     Text(
-                      "THE GREAT PERSON",
+                      "WELCOME TO",
                       style: TextStyle(
                           color: Color.fromARGB(255, 138, 138, 138),
                           fontFamily: 'Quicksand'),
                     ),
+                    Text('Edwin\'s Componant \nLibrary',
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 25,
+                            fontWeight: FontWeight.w200,
+                            fontFamily: 'Quicksand')),
                   ],
                 ),
               ),
               Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  border: Border.all(color: Colors.black)
-                ),
-                margin: EdgeInsets.only(right: 15),
-                height: 65,
-                width: 65,
-                child: Image.asset('assets/a.png'),
-              ),
+                  margin: const EdgeInsets.only(right: 25 , top: 20),
+                  height: 65,
+                  width: 65,
+                  child: Image.asset(width: 30, 'assets/logo.png')),
             ],
           )
         ],

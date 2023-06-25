@@ -1,4 +1,5 @@
-import 'package:edwins_componant_lib/widgets/comp_card_mod.dart';
+import 'package:edwins_componant_lib/models/os_model.dart';
+import 'package:edwins_componant_lib/widgets/componants/comp_card_mod.dart';
 import 'package:flutter/material.dart';
 
 
@@ -14,7 +15,7 @@ class _ComponantAddState extends State<ComponantAdd> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: ListView.builder(itemBuilder: (context , index){
-        return CompCard();
+        return CompCard(title:"" , subtitle: '',);
       },itemCount: 5,),
     );
   }

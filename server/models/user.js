@@ -8,7 +8,7 @@ const userSchema = mongoose.Schema({
         trim:true,
 
     },
-    phone:{
+    email:{
         required:true,
         type:String,
         trim:true,
@@ -17,10 +17,6 @@ const userSchema = mongoose.Schema({
         },
         message:"please enter a valid phone number"
     },
-    borrow:{
-        required:false,
-        type:Object,
-    }
 });
 
 const User = mongoose.model('User' , userSchema);
