@@ -4,8 +4,28 @@ import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
 
-class RegisterPage extends StatelessWidget {
+class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
+
+  @override
+  State<RegisterPage> createState() => _RegisterPageState();
+}
+
+class _RegisterPageState extends State<RegisterPage> {
+TextEditingController emailController = TextEditingController();
+TextEditingController passwordController = TextEditingController();
+bool _isNotValid = false;
+
+void registerUser() async{
+  if(emailController.text.isNotEmpty && passwordController.text.isNotEmpty){
+    _isNotValid = true;
+  }
+  else{
+
+  }
+}
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -55,9 +75,11 @@ class RegisterPage extends StatelessWidget {
               Container(
                 margin:const EdgeInsets.only(top: 30, left: 30, right: 30),
                 child: TextField(
+                  controller: emailController,
                   decoration: InputDecoration(
                       label:const Text('Email'),
                       hintText: 'example@gmail.com',
+                      errorText: _isNotValid ? "Enter Proper Text" : null,
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10))),
                 ),
@@ -65,6 +87,7 @@ class RegisterPage extends StatelessWidget {
               Container(
                 margin:const EdgeInsets.only(top: 30, left: 30, right: 30),
                 child: TextField(
+                  controller: passwordController,
                   decoration: InputDecoration(
                       label:const Text('Password'),
                       border: OutlineInputBorder(
