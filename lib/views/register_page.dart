@@ -1,8 +1,10 @@
+import 'dart:convert';
+import 'package:edwins_componant_lib/constants/constants.dart';
 import 'package:edwins_componant_lib/views/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
-
+import 'package:http/http.dart' as http;
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -12,32 +14,51 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
-TextEditingController emailController = TextEditingController();
-TextEditingController passwordController = TextEditingController();
-bool _isNotValid = false;
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController nameController = TextEditingController();
+  bool _isNotValid = false;
 
-void registerUser() async{
-  if(emailController.text.isNotEmpty && passwordController.text.isNotEmpty){
-    _isNotValid = true;
+  void registerUser() async {
+    if (emailController.text.isNotEmpty &&
+        passwordController.text.isNotEmpty && nameController.text.isNotEmpty) {
+      var regBody = {
+        "name":nameController.text,
+        "email": emailController.text,
+        "password": passwordController.text,
+      };
+
+      var response = await http.post(
+        Uri.parse(registration),
+        headers: {"Content-Type": "application/json"},
+        body: jsonEncode(regBody),
+      );
+      var jsonResponse = jsonDecode(response.body);
+
+      if(jsonResponse['status']){
+        Get.to(()=>const LoginPage());
+        print(jsonResponse);
+      }else{
+        _isNotValid = true;
+      }
+    } else {
+      setState(() {
+        _isNotValid = true;
+      });
+    }
   }
-  else{
-
-  }
-}
-
-
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor:const Color.fromARGB(255, 245, 245, 245),
+      backgroundColor: const Color.fromARGB(255, 245, 245, 245),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
             children: [
               Center(
                 child: Container(
-                  margin:const EdgeInsets.only(top: 20),
+                  margin: const EdgeInsets.only(top: 20),
                   child: const Text(
                     'Welcome',
                     style: TextStyle(
@@ -52,44 +73,40 @@ void registerUser() async{
               ),
               SizedBox(
                 height: 100,
-                child: Lottie.network('https://assets10.lottiefiles.com/packages/lf20_wd1udlcz.json'),
+                child: Lottie.network(
+                    'https://assets10.lottiefiles.com/packages/lf20_wd1udlcz.json'),
               ),
               Container(
-                margin:const EdgeInsets.only(top: 30, left: 30, right: 30),
+                margin: const EdgeInsets.only(top: 30, left: 30, right: 30),
                 child: TextField(
+                  controller: nameController,
                   decoration: InputDecoration(
-                      label:const Text('First Name'),
+                      label: const Text('Name'),
+                      errorText: _isNotValid ? "Enter your name" : null,
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10))),
                 ),
               ),
               Container(
-                margin:const EdgeInsets.only(top: 30, left: 30, right: 30),
-                child: TextField(
-                  decoration: InputDecoration(
-                      label:const Text('Last Name'),
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10))),
-                ),
-              ),
-              Container(
-                margin:const EdgeInsets.only(top: 30, left: 30, right: 30),
+                margin: const EdgeInsets.only(top: 30, left: 30, right: 30),
                 child: TextField(
                   controller: emailController,
                   decoration: InputDecoration(
-                      label:const Text('Email'),
+                      label: const Text('Email'),
                       hintText: 'example@gmail.com',
-                      errorText: _isNotValid ? "Enter Proper Text" : null,
+                      errorText: _isNotValid ? "Enter an email" : null,
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10))),
                 ),
               ),
               Container(
-                margin:const EdgeInsets.only(top: 30, left: 30, right: 30),
+                margin: const EdgeInsets.only(top: 30, left: 30, right: 30),
                 child: TextField(
                   controller: passwordController,
+                  obscureText: true,
                   decoration: InputDecoration(
-                      label:const Text('Password'),
+                      label: const Text('Password'),
+                      errorText: _isNotValid ? "Enter a valid password" : null,
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10))),
                 ),
@@ -99,8 +116,10 @@ void registerUser() async{
                 width: double.infinity,
                 height: 55,
                 child: ElevatedButton(
-                  onPressed: () {},
-                  child: Text('Login'),
+                  onPressed: () {
+                    registerUser();
+                  },
+                  child: Text('Register'),
                 ),
               ),
               const SizedBox(
@@ -114,7 +133,7 @@ void registerUser() async{
                     style: TextStyle(color: Colors.blue),
                   ),
                   onTap: () {
-                    Get.to(()=> const LoginPage());
+                    Get.to(() => const LoginPage());
                   },
                 )
               ])
@@ -122,6 +141,7 @@ void registerUser() async{
           ),
         ),
       ),
-    );;
+    );
+    ;
   }
 }

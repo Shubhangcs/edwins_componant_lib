@@ -1,15 +1,64 @@
+import 'dart:convert';
+import 'package:edwins_componant_lib/views/home_page.dart';
 import 'package:edwins_componant_lib/views/register_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
+import 'package:http/http.dart' as http;
+import '../constants/constants.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  bool _isNotValid = false;
+  late SharedPreferences prefs;
+
+ @override
+  void initState() {
+    super.initState();
+    initSharedPref();
+  }
+
+  void initSharedPref()async{
+    prefs = await SharedPreferences.getInstance();
+  }
+
+  void loginUser() async {
+    if (emailController.text.isNotEmpty && passwordController.text.isNotEmpty) {
+      var regBody = {
+        "email": emailController.text,
+        "password": passwordController.text,
+      };
+      var response = await http.post(
+        Uri.parse(login),
+        headers: {"Content-Type": "application/json"},
+        body: jsonEncode(regBody),
+      );
+
+      var jsonResponse = jsonDecode(response.body);
+
+      if(jsonResponse['status']){
+         var myToken  = jsonResponse['token'];
+         prefs.setString('token', myToken);
+         Get.to(()=>const HomePage());
+      }else{
+        _isNotValid = true;
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor:const Color.fromARGB(255, 245, 245, 245),
+      backgroundColor: const Color.fromARGB(255, 245, 245, 245),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
@@ -17,7 +66,7 @@ class LoginPage extends StatelessWidget {
             children: [
               Center(
                 child: Container(
-                  margin:const EdgeInsets.only(top: 20),
+                  margin: const EdgeInsets.only(top: 20),
                   child: const Text(
                     'Hello',
                     style: TextStyle(
@@ -37,20 +86,25 @@ class LoginPage extends StatelessWidget {
                     'https://assets4.lottiefiles.com/private_files/lf30_iraugwwv.json'),
               ),
               Container(
-                margin:const EdgeInsets.only(top: 30, left: 30, right: 30),
+                margin: const EdgeInsets.only(top: 30, left: 30, right: 30),
                 child: TextField(
+                  controller: emailController,
                   decoration: InputDecoration(
-                      label:const Text('Email'),
+                      label: const Text('Email'),
                       hintText: 'example@gmail.com',
+                      errorText: _isNotValid ? "Enter your mail" : null,
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10))),
                 ),
               ),
               Container(
-                margin:const EdgeInsets.only(top: 30, left: 30, right: 30),
+                margin: const EdgeInsets.only(top: 30, left: 30, right: 30),
                 child: TextField(
+                  controller: passwordController,
+                  obscureText: true,
                   decoration: InputDecoration(
-                      label:const Text('Password'),
+                      label: const Text('Password'),
+                      errorText: _isNotValid ? "Enter the password" : null,
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10))),
                 ),
@@ -60,7 +114,9 @@ class LoginPage extends StatelessWidget {
                 width: double.infinity,
                 height: 55,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    loginUser();
+                  },
                   child: Text('Login'),
                 ),
               ),
@@ -75,7 +131,7 @@ class LoginPage extends StatelessWidget {
                     style: TextStyle(color: Colors.blue),
                   ),
                   onTap: () {
-                    Get.to(()=> const RegisterPage());
+                    Get.to(() => const RegisterPage());
                   },
                 )
               ])
