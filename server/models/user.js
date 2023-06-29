@@ -37,13 +37,8 @@ userSchema.pre('save',async function(){
 
 });
 
-userSchema.methods.comparePassword  = async function(UserPassword){
-  try {
-    const isMatch = await bcrypt.compare(UserPassword , this.password)
-  } catch (error) {
-    throw error;
-  }
-}
+
+
 
 const UserModel = db.model('User' , userSchema);
-module.exports = UserModel;
+module.exports =UserModel;

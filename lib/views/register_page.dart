@@ -21,9 +21,10 @@ class _RegisterPageState extends State<RegisterPage> {
 
   void registerUser() async {
     if (emailController.text.isNotEmpty &&
-        passwordController.text.isNotEmpty && nameController.text.isNotEmpty) {
+        passwordController.text.isNotEmpty &&
+        nameController.text.isNotEmpty) {
       var regBody = {
-        "name":nameController.text,
+        "name": nameController.text,
         "email": emailController.text,
         "password": passwordController.text,
       };
@@ -35,11 +36,18 @@ class _RegisterPageState extends State<RegisterPage> {
       );
       var jsonResponse = jsonDecode(response.body);
 
-      if(jsonResponse['status']){
-        Get.to(()=>const LoginPage());
-        print(jsonResponse);
-      }else{
-        _isNotValid = true;
+      if (jsonResponse['status']) {
+        Get.to(() => const LoginPage());
+      } else {
+        setState(() {
+           var snackBar = SnackBar(
+            content: const Text('Email already exist'),
+            action: SnackBarAction(label: 'login', onPressed:() {
+              Get.to(()=>const LoginPage());
+            },
+          ));
+          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        });
       }
     } else {
       setState(() {

@@ -16,8 +16,8 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
+  TextEditingController _emailController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
   bool _isNotValid = false;
   late SharedPreferences prefs;
 
@@ -32,10 +32,10 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void loginUser() async {
-    if (emailController.text.isNotEmpty && passwordController.text.isNotEmpty) {
+    if (_emailController.text.isNotEmpty && _passwordController.text.isNotEmpty) {
       var regBody = {
-        "email": emailController.text,
-        "password": passwordController.text,
+        "email": _emailController.text,
+        "password": _passwordController.text,
       };
       var response = await http.post(
         Uri.parse(login),
@@ -44,13 +44,21 @@ class _LoginPageState extends State<LoginPage> {
       );
 
       var jsonResponse = jsonDecode(response.body);
-
+      print(jsonResponse);
       if(jsonResponse['status']){
          var myToken  = jsonResponse['token'];
          prefs.setString('token', myToken);
          Get.to(()=>const HomePage());
       }else{
-        _isNotValid = true;
+       setState(() {
+           var snackBar = SnackBar(
+            content: const Text('User doesn\'t exist'),
+            action: SnackBarAction(label: 'Register', onPressed:() {
+              Get.to(()=>const RegisterPage());
+            },
+          ));
+          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        });
       }
     }
   }
@@ -88,7 +96,7 @@ class _LoginPageState extends State<LoginPage> {
               Container(
                 margin: const EdgeInsets.only(top: 30, left: 30, right: 30),
                 child: TextField(
-                  controller: emailController,
+                  controller: _emailController,
                   decoration: InputDecoration(
                       label: const Text('Email'),
                       hintText: 'example@gmail.com',
@@ -100,7 +108,7 @@ class _LoginPageState extends State<LoginPage> {
               Container(
                 margin: const EdgeInsets.only(top: 30, left: 30, right: 30),
                 child: TextField(
-                  controller: passwordController,
+                  controller: _passwordController,
                   obscureText: true,
                   decoration: InputDecoration(
                       label: const Text('Password'),

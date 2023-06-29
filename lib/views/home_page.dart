@@ -5,6 +5,8 @@ import 'package:edwins_componant_lib/widgets/componants/top_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import 'componants/componants_add.dart';
+
 
 
 class HomePage extends StatelessWidget {
@@ -27,7 +29,7 @@ class HomePage extends StatelessWidget {
                     ),
                   child: Column(
                     children: [
-                       GestureDetector(child: const CardModel(title: 'Componants' , subtitle: 'Hardware' , imagepath: 'assets/componants.png',) , onTap: () {Get.to(()=>const ComponantRegister());},),
+                       GestureDetector(child: const CardModel(title: 'Componants' , subtitle: 'Hardware' , imagepath: 'assets/componants.png',) , onTap: () {Get.to(()=>const ComponantAdd());},),
                       GestureDetector(child: const CardModel(title: 'Operating Systems',subtitle: 'Software',imagepath: 'assets/operating_systems.png',), onTap: (){Get.to(()=>const OsPage());},),
                        GestureDetector(child: const CardModel(title: 'Materials',subtitle: 'Books and References',imagepath: 'assets/materials.png',), onTap: (){Get.to(()=>const ComponantRegister());},),
                        GestureDetector(child: const CardModel(title: 'Contact Us',subtitle: 'Help',imagepath: 'assets/contact_us.png',), onTap: (){Get.to(()=>const ComponantRegister());},),

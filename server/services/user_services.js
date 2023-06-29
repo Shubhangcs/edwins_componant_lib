@@ -1,4 +1,5 @@
 const UserModel = require('../models/user');
+const bcrypt=require("bcrypt");
 const jwt = require('jsonwebtoken');
 
 class UserService{
@@ -12,11 +13,23 @@ class UserService{
     }
     static async checkuser(email){
         try {
-            return await UserModel.findOne({email});
+             const data=await UserModel.findOne({email})
+             console.log("called");
+            return (data==null)?false:data;
         } catch (error) {
-            throw error;
+           console.log(error);
         }
     }
+    
+    static async checkpass(userPass,hasedPass){
+        try {
+            const isMatch = await bcrypt.compare(userPass , hasedPass)
+            return isMatch;
+        } catch (error) {
+           console.log(error);
+        }
+    }
+
     static async generateToken(tokenData , secretKey , jwt_expire){
         return jwt.sign(tokenData , secretKey ,{expiresIn: jwt_expire});
     }
