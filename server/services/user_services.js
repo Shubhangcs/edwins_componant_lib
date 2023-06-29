@@ -14,7 +14,6 @@ class UserService{
     static async checkuser(email){
         try {
              const data=await UserModel.findOne({email})
-             console.log("called");
             return (data==null)?false:data;
         } catch (error) {
            console.log(error);

@@ -8,5 +8,4 @@ const connection = mongoose.createConnection(dburl).on('open',()=>{
 });
 
 
-
 module.exports = connection;

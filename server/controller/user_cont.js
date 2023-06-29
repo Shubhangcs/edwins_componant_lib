@@ -16,7 +16,6 @@ exports.login = async (req , res , next)=>{
     try {
         const {email , password} = req.body;
         const user = await UserService.checkuser(email);
-        console.log(user);
         if(!user){
             res.json({status:false , success: "login unsuccessfull"});
         }
@@ -31,11 +30,7 @@ exports.login = async (req , res , next)=>{
             }
  
         }
-
-
-
-
-    } catch (error) {
+ } catch (error) {
                 throw error;
     }
 }

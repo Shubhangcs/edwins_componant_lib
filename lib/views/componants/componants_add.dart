@@ -15,7 +15,7 @@ class _ComponantAddState extends State<ComponantAdd> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: ListView.builder(itemBuilder: (context , index){
-        return CompCard(title:"" , subtitle: '',);
+        return CompCard(title:"" , subtitle: '',imageLink: '',);
       },itemCount: 5,),
     );
   }
