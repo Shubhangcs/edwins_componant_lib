@@ -1,1 +1,0 @@
-const CompModel = require('../models/componants');
