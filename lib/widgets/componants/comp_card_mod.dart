@@ -32,8 +32,8 @@ class CompCard extends StatelessWidget {
               width: 70,
               height: 80,
               margin: const EdgeInsets.only(left: 20),
-              child: Image.asset(
-                'assets/osimage.png',
+              child: Image.network(
+                imagepath,
               ),
             ),
             Expanded(

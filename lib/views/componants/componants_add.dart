@@ -17,6 +17,8 @@ class ComponantAdd extends StatefulWidget {
 
 class _ComponantAddState extends State<ComponantAdd> {
 
+
+ List data  = [];
   @override
 
 void initState() {
@@ -27,11 +29,9 @@ void initState() {
 Future<void> getcomponants()async{
   final response = await http.get(Uri.parse(componants));
   final res = jsonDecode(response.body);
-  final List<CompCard> CompData= [
-    CompCard(title: res[{'name'}], subtitle: res[{'subtitle'}], imagepath: res[{'image'}])
-  ];
-  print(CompData);
-
+  setState(() {
+    data = res;
+  });
 }
 
 
@@ -40,8 +40,8 @@ Future<void> getcomponants()async{
   Widget build(BuildContext context) {
     return Scaffold(
       body: ListView.builder(itemBuilder: (context , index){
-        return CompCard(title: '', subtitle: '',imagepath: '',);
-      },itemCount: 5,),
+        return CompCard(title: data[index]['name'], subtitle: data[index]['subtitle'],imagepath: data[index]['image'],);
+      },itemCount: data.length,),
     );
   }
 }
