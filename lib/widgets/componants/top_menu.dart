@@ -1,4 +1,3 @@
-import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 
 class TopMenu extends StatelessWidget {
@@ -40,7 +39,7 @@ class TopMenu extends StatelessWidget {
                   margin: const EdgeInsets.only(right: 25 , top: 20),
                   height: 65,
                   width: 65,
-                  child: Image.asset(width: 30, 'assets/logo.png')),
+                  child: ClipRRect(borderRadius: BorderRadius.circular(10),child: Image.asset(width: 30, 'assets/logo.png' , ))),
             ],
           )
         ],

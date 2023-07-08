@@ -1,16 +1,24 @@
 import 'package:flutter/material.dart';
 
-class CompCard extends StatelessWidget {
+class CompCard extends StatefulWidget {
   final String title;
   final String subtitle;
   final String imagepath;
-  const CompCard({
+
+ const CompCard({
     super.key,
     required this.title,
     required this.subtitle,
-    required this.imagepath
+    required this.imagepath,
   });
 
+  @override
+  State<CompCard> createState() => _CompCardState();
+}
+
+class _CompCardState extends State<CompCard> {
+ var icons = Icons.add_rounded;
+ 
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -33,7 +41,7 @@ class CompCard extends StatelessWidget {
               height: 80,
               margin: const EdgeInsets.only(left: 20),
               child: Image.network(
-                imagepath,
+                widget.imagepath,
               ),
             ),
             Expanded(
@@ -44,7 +52,7 @@ class CompCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      title,
+                      widget.title,
                       style:const TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 22,
@@ -52,7 +60,7 @@ class CompCard extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      subtitle,
+                      widget.subtitle,
                       style:const TextStyle(
                         color: Colors.grey,
                         fontWeight: FontWeight.w400,
@@ -64,15 +72,19 @@ class CompCard extends StatelessWidget {
               ),
             ),
             GestureDetector(
-              child: const SizedBox(
+              child:  SizedBox(
                 width: 60,
                 height: 80,
                 child: Icon(
-                  Icons.add_rounded,
+                  icons,
                   size: 25,
                 ),
               ),
-              onTap: () {},
+              onTap: () {
+                setState(() {
+                  icons = Icons.done;
+                });
+              },
             ),
           ],
         ),
