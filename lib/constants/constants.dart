@@ -1,5 +1,5 @@
-final url = 'http://192.168.22.34:3000';
+const url = 'http://192.168.49.233:3000';
 
-final registration = url + '/registration';
-final login = url + '/login';
-final componants = url + '/main/componant';
+const registration = '$url/registration';
+const login = '$url/login';
+const componants = '$url/main/componant';

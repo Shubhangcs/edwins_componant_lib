@@ -13,13 +13,18 @@ class LoginPage extends StatefulWidget {
 
   @override
   State<LoginPage> createState() => _LoginPageState();
+    
 }
 
 class _LoginPageState extends State<LoginPage> {
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
-  bool _isNotValid = false;
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final bool _isNotValid = false;
   late SharedPreferences prefs;
+
+
+ String email()=> emailController.text;
+ 
 
  @override
   void initState() {
@@ -32,9 +37,9 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void loginUser() async {
-    if (_emailController.text.isNotEmpty && _passwordController.text.isNotEmpty) {
+    if (emailController.text.isNotEmpty && _passwordController.text.isNotEmpty) {
       var regBody = {
-        "email": _emailController.text,
+        "email": emailController.text,
         "password": _passwordController.text,
       };
       var response = await http.post(
@@ -95,7 +100,7 @@ class _LoginPageState extends State<LoginPage> {
               Container(
                 margin: const EdgeInsets.only(top: 30, left: 30, right: 30),
                 child: TextField(
-                  controller: _emailController,
+                  controller: emailController,
                   decoration: InputDecoration(
                       label: const Text('Email'),
                       hintText: 'example@gmail.com',
@@ -124,7 +129,7 @@ class _LoginPageState extends State<LoginPage> {
                   onPressed: () {
                     loginUser();
                   },
-                  child: Text('Login'),
+                  child:const Text('Login'),
                 ),
               ),
               const SizedBox(

@@ -4,7 +4,6 @@ import 'package:edwins_componant_lib/widgets/common/top_nav.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-
 class ComponantAdd extends StatefulWidget {
   const ComponantAdd({super.key});
 
@@ -13,125 +12,135 @@ class ComponantAdd extends StatefulWidget {
 }
 
 class _ComponantAddState extends State<ComponantAdd> {
-
- var icons = Icons.add_rounded;
- List data  = [];
- List userData = [];
+  var icons = Icons.add_rounded;
+  List data = [];
+  List userData = [];
 
   @override
-
-void initState() {
+  void initState() {
     super.initState();
     getcomponants();
   }
 
-Future<void> getcomponants()async{
-  final response = await http.get(Uri.parse(componants));
-  final res = jsonDecode(response.body);
-  setState(() {
-    data = res;
-  });
-}
+  Future<void> getcomponants() async {
+    final response = await http.get(Uri.parse(componants));
+    final res = jsonDecode(response.body);
+    setState(() {
+      data = res;
+    });
+  }
 
-@override
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
         child: Column(
           children: [
-            const TopNav(title: 'Componants',),
-            Container(
-              height: 530,
-              child: ListView.builder(itemBuilder: (context , index){
-                return Container(
-      height: 100,
-      width: double.infinity,
-      margin: const EdgeInsets.only(left: 20, right: 20, top: 20),
-      child: Card(
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(
-            Radius.circular(20),
-          ),
-        ),
-        elevation: 10,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Container(
-              width: 70,
-              height: 80,
-              margin: const EdgeInsets.only(left: 20),
-              child: Image.network(
-               data[index]['image'],
-              ),
+            const TopNav(
+              title: 'Componants',
             ),
-            Expanded(
-              child: Container(
-                margin: const EdgeInsets.only(left: 20),
-                child:  Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      data[index]['name'],
-                      style:const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 22,
-                        fontFamily: 'Quicksand',
+           SizedBox(
+              height: 530,
+              child: ListView.builder(
+                itemBuilder: (context, index) {
+                  return Container(
+                    height: 100,
+                    width: double.infinity,
+                    margin: const EdgeInsets.only(left: 20, right: 20, top: 20),
+                    child: Card(
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(20),
+                        ),
+                      ),
+                      elevation: 10,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Container(
+                            width: 70,
+                            height: 80,
+                            margin: const EdgeInsets.only(left: 20),
+                            child: Image.network(
+                              data[index]['image'],
+                            ),
+                          ),
+                          Expanded(
+                            child: Container(
+                              margin: const EdgeInsets.only(left: 20),
+                              child: Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    data[index]['name'],
+                                    style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 22,
+                                      fontFamily: 'Quicksand',
+                                    ),
+                                  ),
+                                  Text(
+                                    data[index]['subtitle'],
+                                    style: const TextStyle(
+                                      color: Colors.grey,
+                                      fontWeight: FontWeight.w400,
+                                      fontFamily: 'Quicksand',
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                          GestureDetector(
+                            child: SizedBox(
+                              width: 60,
+                              height: 80,
+                              child: Icon(
+                                icons,
+                                size: 25,
+                              ),
+                            ),
+                            onTap: () {
+                              setState(() {
+                                userData.add(data[index]);
+                              });
+                              print(userData);
+                              // print();
+                            },
+                          ),
+                        ],
                       ),
                     ),
-                    Text(
-                    data[index]['subtitle'],
-                      style:const TextStyle(
-                        color: Colors.grey,
-                        fontWeight: FontWeight.w400,
-                        fontFamily: 'Quicksand',
-                      ),
-                    )
-                  ],
-                ),
+                  );
+                },
+                itemCount: data.length,
               ),
             ),
             GestureDetector(
-              child:  SizedBox(
-                width: 60,
-                height: 80,
-                child: Icon(
-                  icons,
-                  size: 25,
+              child: Container(
+                margin: const EdgeInsets.only(top: 15, left: 20, right: 20),
+                width: double.infinity,
+                height: 55,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: const Color.fromARGB(173, 0, 0, 0),
+                ),
+                child: const Center(
+                  child: Text(
+                    'Borrow',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontFamily: 'Quicksand',
+                      fontSize: 20,
+                    ),
+                  ),
                 ),
               ),
-              onTap: () {
-                setState(() {
-                  userData.add(data[index]);
-                });
-              },
-            ),
-          ],
-        ),
-      ),
-    );
-              },itemCount: data.length,),
-            ),
-          GestureDetector(
-            child: Container(
-              margin:const EdgeInsets.only(top: 15 , left:20 , right: 20 ),
-              width: double.infinity,
-              height: 55,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color:const Color.fromARGB(173, 0, 0, 0),
-              ),
-              child:const Center(
-                child: Text('Borrow' , style: TextStyle(color: Colors.white , fontFamily: 'Quicksand' , fontSize: 20 ,),),
-              ),
-            ),
-            onTap: (){
-
-            },
-          )
-            
+              onTap: () {},
+            )
           ],
         ),
       ),
