@@ -22,7 +22,9 @@ const usercomponants = mongoose.Schema({
             required: true
           }
         }
-      ]
+
+      ],
+      time : { type : Date, default: Date.now }
 });
 
 const UserComponants = db.model('usercomp',usercomponants);

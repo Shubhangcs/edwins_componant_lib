@@ -7,7 +7,7 @@ class TopMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: double.infinity,
-      height: 150,
+      height: 110,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

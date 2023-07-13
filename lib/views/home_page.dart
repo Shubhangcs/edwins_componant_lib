@@ -1,3 +1,4 @@
+import 'package:edwins_componant_lib/views/cart/cart.dart';
 import 'package:edwins_componant_lib/views/contact/contact.dart';
 import 'package:edwins_componant_lib/views/operating_systems/operating_system.dart';
 import 'package:edwins_componant_lib/widgets/main_page/card_model.dart';
@@ -70,6 +71,12 @@ class HomePage extends StatelessWidget {
                         Get.to(() => const ContactUs());
                       },
                     ),
+                    Container(
+                      margin:const EdgeInsets.only(top: 10),
+                      child: FloatingActionButton(onPressed: (){
+                        Get.to(()=>const Cart());
+                      },backgroundColor: Colors.white,child:const Icon( Icons.shopping_cart_outlined , color: Colors.black,),),
+                    )
                   ],
                 ),
               ),

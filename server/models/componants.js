@@ -17,7 +17,8 @@ const componantSchema = mongoose.Schema({
         required:true,
         type:String,
         trim:true
-    }
+    },
+
 });
 
 const CompModel = db.model('componant',componantSchema);

@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:http/http.dart' as http;
-
+TextEditingController nameController = TextEditingController();
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
 
@@ -16,7 +16,7 @@ class RegisterPage extends StatefulWidget {
 class _RegisterPageState extends State<RegisterPage> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  TextEditingController nameController = TextEditingController();
+  
   bool _isNotValid = false;
 
   void registerUser() async {

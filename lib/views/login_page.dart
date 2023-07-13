@@ -7,37 +7,33 @@ import 'package:lottie/lottie.dart';
 import 'package:http/http.dart' as http;
 import '../constants/constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
+  final TextEditingController emailController = TextEditingController();
+  final String email = emailController.text;
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
   @override
   State<LoginPage> createState() => _LoginPageState();
-    
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final TextEditingController emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final bool _isNotValid = false;
   late SharedPreferences prefs;
 
-
- String email()=> emailController.text;
- 
-
- @override
+  @override
   void initState() {
     super.initState();
     initSharedPref();
   }
 
-  void initSharedPref()async{
+  void initSharedPref() async {
     prefs = await SharedPreferences.getInstance();
   }
 
   void loginUser() async {
-    if (emailController.text.isNotEmpty && _passwordController.text.isNotEmpty) {
+    if (emailController.text.isNotEmpty &&
+        _passwordController.text.isNotEmpty) {
       var regBody = {
         "email": emailController.text,
         "password": _passwordController.text,
@@ -49,20 +45,25 @@ class _LoginPageState extends State<LoginPage> {
       );
 
       var jsonResponse = jsonDecode(response.body);
-      if(jsonResponse['status']){
-         var myToken  = jsonResponse['token'];
-         prefs.setString('token', myToken);
-         Get.to(()=>const HomePage());
-      }else{
-       setState(() {
-           var snackBar = SnackBar(
-            content: const Text('User doesn\'t exist'),
-            action: SnackBarAction(label: 'Register', onPressed:() {
-              Get.to(()=>const RegisterPage());
-            },
-          ));
-          ScaffoldMessenger.of(context).showSnackBar(snackBar);
-        });
+      if (jsonResponse['status']) {
+        var myToken = jsonResponse['token'];
+        prefs.setString('token', myToken);
+        Get.to(() => const HomePage());
+      } else {
+        setState(
+          () {
+            var snackBar = SnackBar(
+              content: const Text('User doesn\'t exist'),
+              action: SnackBarAction(
+                label: 'Register',
+                onPressed: () {
+                  Get.to(() => const RegisterPage());
+                },
+              ),
+            );
+            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+          },
+        );
       }
     }
   }
@@ -129,7 +130,7 @@ class _LoginPageState extends State<LoginPage> {
                   onPressed: () {
                     loginUser();
                   },
-                  child:const Text('Login'),
+                  child: const Text('Login'),
                 ),
               ),
               const SizedBox(

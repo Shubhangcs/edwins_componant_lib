@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:edwins_componant_lib/constants/constants.dart';
+import 'package:edwins_componant_lib/views/login_page.dart';
 import 'package:edwins_componant_lib/widgets/common/top_nav.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -14,8 +15,7 @@ class ComponantAdd extends StatefulWidget {
 class _ComponantAddState extends State<ComponantAdd> {
   var icons = Icons.add_rounded;
   List data = [];
-  List userData = [];
-
+  static List userData = [];
   @override
   void initState() {
     super.initState();
@@ -30,6 +30,21 @@ class _ComponantAddState extends State<ComponantAdd> {
     });
   }
 
+  var compbody = {"name": emailController.text, "items": userData};
+
+  void uploadData() async {
+    var res = await http.post(Uri.parse(addcomp),
+        headers: {"Content-Type": "application/json"},
+        body: jsonEncode(compbody));
+    var jsonResponse = jsonDecode(res.body);
+    if(jsonResponse['status']){
+
+    }
+    else{
+
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,7 +54,7 @@ class _ComponantAddState extends State<ComponantAdd> {
             const TopNav(
               title: 'Componants',
             ),
-           SizedBox(
+            SizedBox(
               height: 530,
               child: ListView.builder(
                 itemBuilder: (context, index) {
@@ -106,6 +121,16 @@ class _ComponantAddState extends State<ComponantAdd> {
                             onTap: () {
                               setState(() {
                                 userData.add(data[index]);
+                                var snackBar = SnackBar(
+                                  content: const Text('Componant added'),
+                                  action: SnackBarAction(
+                                    label: 'undo',
+                                    onPressed: () {
+                                      userData.remove(data[index]);
+                                    },
+                                  ),
+                                );
+                                ScaffoldMessenger.of(context).showSnackBar(snackBar);
                               });
                               print(userData);
                               // print();
@@ -139,7 +164,10 @@ class _ComponantAddState extends State<ComponantAdd> {
                   ),
                 ),
               ),
-              onTap: () {},
+              onTap: () {
+                uploadData();
+                userData.clear();
+              },
             )
           ],
         ),
