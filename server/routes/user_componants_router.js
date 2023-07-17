@@ -10,8 +10,6 @@ route.post('/usercomp', (req, res) => {
     name,
     items
   })
-  
-console.log(post)
   post.save().then(savedPost => {
     res.json(savedPost);
   })

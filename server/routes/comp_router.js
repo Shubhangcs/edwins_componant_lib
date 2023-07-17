@@ -14,5 +14,8 @@ rout.get('/componant', async (req, res) => {
   }
 });
 
+rout.get("/test",(req,res)=>{
+  res.send("hello world");
+})
 module.exports = rout;
 
