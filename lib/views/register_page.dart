@@ -1,11 +1,12 @@
 import 'dart:convert';
-import 'package:edwins_componant_lib/constants/constants.dart';
+import 'package:edwins_componant_lib/constants.dart';
 import 'package:edwins_componant_lib/views/login_page.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:http/http.dart' as http;
+
 TextEditingController nameController = TextEditingController();
+
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
 
@@ -16,7 +17,7 @@ class RegisterPage extends StatefulWidget {
 class _RegisterPageState extends State<RegisterPage> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  
+
   bool _isNotValid = false;
 
   void registerUser() async {
@@ -37,15 +38,24 @@ class _RegisterPageState extends State<RegisterPage> {
       var jsonResponse = jsonDecode(response.body);
 
       if (jsonResponse['status']) {
-        Get.to(() => const LoginPage());
+        // ignore: use_build_context_synchronously
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const LoginPage()),
+        );
       } else {
         setState(() {
-           var snackBar = SnackBar(
-            content: const Text('Email already exist'),
-            action: SnackBarAction(label: 'login', onPressed:() {
-              Get.to(()=>const LoginPage());
-            },
-          ));
+          var snackBar = SnackBar(
+              content: const Text('Email already exist'),
+              action: SnackBarAction(
+                label: 'login',
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const LoginPage()),
+                  );
+                },
+              ));
           ScaffoldMessenger.of(context).showSnackBar(snackBar);
         });
       }
@@ -141,7 +151,11 @@ class _RegisterPageState extends State<RegisterPage> {
                     style: TextStyle(color: Colors.blue),
                   ),
                   onTap: () {
-                    Get.to(() => const LoginPage());
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const LoginPage()),
+                    );
                   },
                 )
               ])
@@ -150,6 +164,5 @@ class _RegisterPageState extends State<RegisterPage> {
         ),
       ),
     );
-    ;
   }
 }

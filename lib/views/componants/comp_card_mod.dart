@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
 
+
+
+List userData = [];
+
+ var icons = Icons.add_rounded;
+
 class CompCard extends StatefulWidget {
   final String title;
   final String subtitle;
@@ -12,13 +18,16 @@ class CompCard extends StatefulWidget {
     required this.imagepath,
   });
 
+
   @override
   State<CompCard> createState() => _CompCardState();
 }
 
 class _CompCardState extends State<CompCard> {
- var icons = Icons.add_rounded;
- 
+
+
+
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -80,9 +89,10 @@ class _CompCardState extends State<CompCard> {
                   size: 25,
                 ),
               ),
-              onTap: () {
+              onTap: (){
                 setState(() {
                   icons = Icons.done;
+                  userData.add({'name': widget.title,'image': widget.imagepath , 'subtitle': widget.subtitle});
                 });
               },
             ),

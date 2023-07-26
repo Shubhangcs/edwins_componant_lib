@@ -6,11 +6,11 @@ const CompRouter = require('./routes/comp_router');
 const UserData = require('./routes/user_componants_router');
 const app = express();
 app.use(cors({
-    origin:"http://localhost:62713"
+    origin:"http://localhost:56136"
 }))
-app.get("/test",(req,res)=>{
-    res.send("hello");
-})
+// app.get("/test",(req,res)=>{
+//     res.send("hello");
+// })
 app.use(body_parser.json());
 app.use('/' , UserRoute);
 app.use('/main',CompRouter);

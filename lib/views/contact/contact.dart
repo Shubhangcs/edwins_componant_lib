@@ -1,4 +1,4 @@
-import 'package:edwins_componant_lib/widgets/common/top_nav.dart';
+import 'package:edwins_componant_lib/widgets/top_nav.dart';
 import 'package:flutter/material.dart';
 
 

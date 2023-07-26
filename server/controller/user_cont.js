@@ -2,6 +2,7 @@ const UserService = require('../services/user_services');
 const UserModel=require("../models/user");
 
 
+
 exports.register = async (req , res , next)=>{
     try {
         const {name ,email , password} = req.body;
@@ -34,3 +35,4 @@ exports.login = async (req , res , next)=>{
                 throw error;
     }
 }
+

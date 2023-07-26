@@ -1,11 +1,9 @@
-import 'package:edwins_componant_lib/views/cart/cart.dart';
 import 'package:edwins_componant_lib/views/contact/contact.dart';
+import 'package:edwins_componant_lib/views/materials/material_main.dart';
 import 'package:edwins_componant_lib/views/operating_systems/operating_system.dart';
-import 'package:edwins_componant_lib/widgets/main_page/card_model.dart';
-import 'package:edwins_componant_lib/widgets/componants/top_menu.dart';
+import 'package:edwins_componant_lib/widgets/card_model.dart';
+import 'package:edwins_componant_lib/widgets/top_menu.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-
 import 'componants/componants_add.dart';
 
 class HomePage extends StatelessWidget {
@@ -21,7 +19,7 @@ class HomePage extends StatelessWidget {
             const TopMenu(),
             Expanded(
               child: Container(
-                margin:const EdgeInsets.only(top: 40),
+                margin: const EdgeInsets.only(top: 40),
                 decoration: const BoxDecoration(
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(30),
@@ -33,12 +31,16 @@ class HomePage extends StatelessWidget {
                   children: [
                     GestureDetector(
                       child: const CardModel(
-                        title: 'Componants',
+                        title: 'Components',
                         subtitle: 'Hardware',
                         imagepath: 'assets/componants.png',
                       ),
                       onTap: () {
-                        Get.to(() => const ComponantAdd());
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const ComponantAdd()),
+                        );
                       },
                     ),
                     GestureDetector(
@@ -48,7 +50,11 @@ class HomePage extends StatelessWidget {
                         imagepath: 'assets/operating_systems.png',
                       ),
                       onTap: () {
-                        Get.to(() => const OsPage());
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const OsPage()),
+                        );
                       },
                     ),
                     GestureDetector(
@@ -58,7 +64,11 @@ class HomePage extends StatelessWidget {
                         imagepath: 'assets/materials.png',
                       ),
                       onTap: () {
-                        Get.to(() => const ComponantAdd());
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const MaterialMain()),
+                        );
                       },
                     ),
                     GestureDetector(
@@ -68,15 +78,13 @@ class HomePage extends StatelessWidget {
                         imagepath: 'assets/contact_us.png',
                       ),
                       onTap: () {
-                        Get.to(() => const ContactUs());
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const ContactUs()),
+                        );
                       },
                     ),
-                    Container(
-                      margin:const EdgeInsets.only(top: 10),
-                      child: FloatingActionButton(onPressed: (){
-                        Get.to(()=>const Cart());
-                      },backgroundColor: Colors.white,child:const Icon( Icons.shopping_cart_outlined , color: Colors.black,),),
-                    )
                   ],
                 ),
               ),

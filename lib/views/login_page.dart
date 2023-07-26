@@ -2,13 +2,14 @@ import 'dart:convert';
 import 'package:edwins_componant_lib/views/home_page.dart';
 import 'package:edwins_componant_lib/views/register_page.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:http/http.dart' as http;
-import '../constants/constants.dart';
+import '../constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-  final TextEditingController emailController = TextEditingController();
-  final String email = emailController.text;
+
+final TextEditingController emailController = TextEditingController();
+final String email = emailController.text;
+
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
@@ -48,7 +49,12 @@ class _LoginPageState extends State<LoginPage> {
       if (jsonResponse['status']) {
         var myToken = jsonResponse['token'];
         prefs.setString('token', myToken);
-        Get.to(() => const HomePage());
+
+        // ignore: use_build_context_synchronously
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const HomePage()),
+        );
       } else {
         setState(
           () {
@@ -57,7 +63,11 @@ class _LoginPageState extends State<LoginPage> {
               action: SnackBarAction(
                 label: 'Register',
                 onPressed: () {
-                  Get.to(() => const RegisterPage());
+                  Navigator.pop(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const RegisterPage()),
+                        );
                 },
               ),
             );
@@ -144,7 +154,11 @@ class _LoginPageState extends State<LoginPage> {
                     style: TextStyle(color: Colors.blue),
                   ),
                   onTap: () {
-                    Get.to(() => const RegisterPage());
+                    Navigator.pop(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const RegisterPage()),
+                    );
                   },
                 )
               ])

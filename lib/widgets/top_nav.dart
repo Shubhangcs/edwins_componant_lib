@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-
-import '../../views/home_page.dart';
+import '../views/home_page.dart';
 
 class TopNav extends StatelessWidget {
-
-final String title;
-  const TopNav({super.key ,required this.title});
+  final String title;
+  const TopNav({super.key, required this.title});
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +11,7 @@ final String title;
       children: [
         Center(
           child: Container(
-            margin:const EdgeInsets.only(top: 20, left: 20, right: 20),
+            margin: const EdgeInsets.only(top: 20, left: 20, right: 20),
             width: double.infinity,
             height: 80,
             child: Row(
@@ -31,7 +28,11 @@ final String title;
                       ),
                     ),
                     onTap: () {
-                      Get.back(result: const HomePage());
+                      Navigator.pop(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const HomePage()),
+                      );
                     },
                   ),
                 ),
@@ -40,10 +41,10 @@ final String title;
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10)),
                     elevation: 8,
-                    child:  Center(
+                    child: Center(
                       child: Text(
-                       title,
-                        style:const TextStyle(
+                        title,
+                        style: const TextStyle(
                             color: Colors.black,
                             fontSize: 25,
                             fontFamily: 'Quicksand',
