@@ -47,7 +47,16 @@ class _ContactUsState extends State<ContactUs> {
                       ),
                       const Text('COME JOIN US ' , style: TextStyle(color: Colors.black , fontSize: 20 , fontFamily: 'Quicksand'),),
 
-                      
+                      Container(
+                        margin:const EdgeInsets.only(top: 10),
+                        width: 80,
+                        height: 80,
+                        child: Card(
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                          elevation: 10,
+                          child:const Icon(Icons.arrow_forward_ios_rounded , size: 30,),
+                        ),
+                      )
                     ],
                   ),
                 ),

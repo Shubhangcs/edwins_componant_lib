@@ -31,26 +31,26 @@ class CardModel extends StatelessWidget {
             Container(
               width: 70,
               height: 80,
-              margin: EdgeInsets.only(left: 20),
+              margin:const EdgeInsets.only(left: 20),
               child: Image.asset(imagepath),
             ),
             Expanded(
               child: Container(
-                margin: EdgeInsets.only(left: 20),
+                margin:const EdgeInsets.only(left: 20),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       title,
-                      style: TextStyle(
+                      style:const TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 22,
                           fontFamily: 'Quicksand'),
                     ),
                     Text(
                       subtitle,
-                      style: TextStyle(
+                      style:const TextStyle(
                           color: Colors.grey,
                           fontWeight: FontWeight.w400,
                           fontFamily: 'Quicksand'),
@@ -59,7 +59,7 @@ class CardModel extends StatelessWidget {
                 ),
               ),
             ),
-            Container(
+          const  SizedBox(
               width: 60,
               height: 80,
               child: Icon(

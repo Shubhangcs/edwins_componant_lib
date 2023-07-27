@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+import 'package:edwins_componant_lib/constants.dart';
 import 'package:edwins_componant_lib/views/materials/pdf_view.dart';
 import 'package:edwins_componant_lib/widgets/card_model.dart';
 import 'package:edwins_componant_lib/widgets/top_nav.dart';
@@ -11,6 +14,22 @@ class MaterialMain extends StatefulWidget {
 }
 
 class _MaterialMainState extends State<MaterialMain> {
+  List books = [];
+
+  @override
+  void initState() {
+    super.initState();
+    getMaterials();
+  }
+
+  Future<void> getMaterials() async {
+    final response = await http.get(Uri.parse(materials));
+    final res = jsonDecode(response.body);
+    setState(() {
+      books = res;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,26 +37,31 @@ class _MaterialMainState extends State<MaterialMain> {
           child: Container(
         child: Column(
           children: [
-            TopNav(title: 'Materials'),
-            GestureDetector(
-              child: CardModel(
-                  title: "Python",
-                  subtitle: "detail",
-                  imagepath:
-                      "https://static.realpython.com/python-basics-sample-chapters.png"),
-              onTap: () {
-                setState(() {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const PdfView(
-                          link:
-                              "https://static.realpython.com/python-basics-sample-chapters.pdf"),
-                    ),
+            const TopNav(title: 'Materials'),
+            Container(
+              child: Expanded(
+                  child: ListView.builder(
+                itemBuilder: (context, index) {
+                  return GestureDetector(
+                    child:  CardModel(
+                        title: books[index]['name'],
+                        subtitle: books[index]['name'],
+                        imagepath: "assets/1489798288.png"),
+                    onTap: () {
+                      setState(() {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => PdfView(link: books[index]['link']),
+                          ),
+                        );
+                      });
+                    },
                   );
-                });
-              },
-            )
+                },
+                itemCount: books.length,
+              )),
+            ),
           ],
         ),
       )),
