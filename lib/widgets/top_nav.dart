@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../views/componants/comp_card_mod.dart';
 import '../views/home_page.dart';
 
 class TopNav extends StatelessWidget {
@@ -28,6 +29,8 @@ class TopNav extends StatelessWidget {
                       ),
                     ),
                     onTap: () {
+                      userData.clear();
+                      icons = Icons.add_rounded;
                       Navigator.pop(
                         context,
                         MaterialPageRoute(

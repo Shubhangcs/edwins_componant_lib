@@ -59,17 +59,22 @@ class _LoginPageState extends State<LoginPage> {
         setState(
           () {
             var snackBar = SnackBar(
-              content: const Text('User doesn\'t exist'),
+              content: const Text('User doesn\'t exist' , style: TextStyle(color: Colors.black),),
               action: SnackBarAction(
                 label: 'Register',
                 onPressed: () {
                   Navigator.pop(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const RegisterPage()),
-                        );
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const RegisterPage()),
+                  );
                 },
               ),
+              backgroundColor: Colors.white,
+              elevation: 10,
+              behavior: SnackBarBehavior.floating,
+              shape:const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(10))),
             );
             ScaffoldMessenger.of(context).showSnackBar(snackBar);
           },
@@ -105,8 +110,7 @@ class _LoginPageState extends State<LoginPage> {
               SizedBox(
                 width: double.infinity,
                 height: 300,
-                child: LottieBuilder.network(
-                    'https://assets4.lottiefiles.com/private_files/lf30_iraugwwv.json'),
+                child: LottieBuilder.asset('assets/animation_lkmufejq.json')
               ),
               Container(
                 margin: const EdgeInsets.only(top: 30, left: 30, right: 30),

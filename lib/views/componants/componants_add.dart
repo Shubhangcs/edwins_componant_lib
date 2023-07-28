@@ -41,7 +41,12 @@ class _ComponantAddState extends State<ComponantAdd> {
       setState(() {
         userData.clear();
         var snackBar = const SnackBar(
-          content: Text('Component request success..'),
+          content: Text('Component request success..' , style: TextStyle(color: Colors.black),),
+          backgroundColor: Colors.white,
+          elevation: 10,
+          behavior: SnackBarBehavior.floating,
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(10))),
         );
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
         Navigator.pop(
@@ -54,7 +59,15 @@ class _ComponantAddState extends State<ComponantAdd> {
         icons = Icons.add_rounded;
         userData.clear();
         var snackBar = const SnackBar(
-          content: Text('Error add components again'),
+          content: Text(
+            'Error add components again',
+            style: TextStyle(color: Colors.black),
+          ),
+          backgroundColor: Colors.white,
+          elevation: 10,
+          behavior: SnackBarBehavior.floating,
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(10))),
         );
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
       });
@@ -112,7 +125,7 @@ class _ComponantAddState extends State<ComponantAdd> {
                 ),
                 GestureDetector(
                   child: Container(
-                    margin: const EdgeInsets.only(top: 15 , left: 10),
+                    margin: const EdgeInsets.only(top: 15, left: 10),
                     height: 55,
                     width: 50,
                     decoration: BoxDecoration(
@@ -120,7 +133,10 @@ class _ComponantAddState extends State<ComponantAdd> {
                       color: const Color.fromARGB(173, 0, 0, 0),
                     ),
                     child: const Center(
-                      child: Icon(Icons.restart_alt_outlined , color: Colors.white,),
+                      child: Icon(
+                        Icons.restart_alt_outlined,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
                   onTap: () {

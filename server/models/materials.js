@@ -8,10 +8,14 @@ const materialsSchema = mongoose.Schema({
         type:String,
         trim:true
     },
-    link:{
+    subtitle:{
         required:true,
         type:String,
         trim:true
+    },
+    link:{
+        required:true,
+        type:String,
     }
 });
 

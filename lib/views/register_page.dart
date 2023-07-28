@@ -46,16 +46,22 @@ class _RegisterPageState extends State<RegisterPage> {
       } else {
         setState(() {
           var snackBar = SnackBar(
-              content: const Text('Email already exist'),
-              action: SnackBarAction(
-                label: 'login',
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const LoginPage()),
-                  );
-                },
-              ));
+            content: const Text('Email already exist' , style: TextStyle(color: Colors.black),),
+            action: SnackBarAction(
+              label: 'login',
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const LoginPage()),
+                );
+              },
+            ),
+            backgroundColor: Colors.white,
+            elevation: 10,
+            behavior: SnackBarBehavior.floating,
+            shape:const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(10))),
+          );
           ScaffoldMessenger.of(context).showSnackBar(snackBar);
         });
       }
@@ -91,8 +97,7 @@ class _RegisterPageState extends State<RegisterPage> {
               ),
               SizedBox(
                 height: 100,
-                child: Lottie.network(
-                    'https://assets10.lottiefiles.com/packages/lf20_wd1udlcz.json'),
+                child: Lottie.asset('assets/animation_lkmu1fn9.json')
               ),
               Container(
                 margin: const EdgeInsets.only(top: 30, left: 30, right: 30),
@@ -163,6 +168,6 @@ class _RegisterPageState extends State<RegisterPage> {
           ),
         ),
       ),
-    ); 
+    );
   }
 }

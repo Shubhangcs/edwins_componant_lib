@@ -15,9 +15,10 @@ module.exports = router.get('/materiall',async(req,res)=>{
 });
 
 module.exports = router.post('/materials' ,(req,res)=>{
-    const {name , link} = req.body;
+    const {name , subtitle , link} = req.body;
     const add = new MaterialSchema({
         name,
+        subtitle,
         link
     })
     add.save().then(savePost => {
