@@ -3,7 +3,7 @@ const db = require('../config/db');
 const MaterialSchema = require('../models/materials');
 
 
-module.exports = router.get('/materiall',async(req,res)=>{
+module.exports = router.get('/getmaterials',async(req,res)=>{
     try {
         const collection = db.collection('materials');
         const data = await collection.find().toArray();
@@ -14,7 +14,7 @@ module.exports = router.get('/materiall',async(req,res)=>{
     }
 });
 
-module.exports = router.post('/materials' ,(req,res)=>{
+module.exports = router.post('/addmaterials' ,(req,res)=>{
     const {name , subtitle , link} = req.body;
     const add = new MaterialSchema({
         name,

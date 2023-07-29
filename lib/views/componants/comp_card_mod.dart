@@ -1,33 +1,25 @@
 import 'package:flutter/material.dart';
 
-
-
 List userData = [];
 
- var icons = Icons.add_rounded;
+var icons = Icons.add_rounded;
 
 class CompCard extends StatefulWidget {
   final String title;
   final String subtitle;
   final String imagepath;
 
- const CompCard({
+  const CompCard({
     super.key,
     required this.title,
     required this.subtitle,
     required this.imagepath,
   });
-
-
   @override
   State<CompCard> createState() => _CompCardState();
 }
 
 class _CompCardState extends State<CompCard> {
-
-
-
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -56,13 +48,13 @@ class _CompCardState extends State<CompCard> {
             Expanded(
               child: Container(
                 margin: const EdgeInsets.only(left: 20),
-                child:  Column(
+                child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       widget.title,
-                      style:const TextStyle(
+                      style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 22,
                         fontFamily: 'Quicksand',
@@ -70,7 +62,7 @@ class _CompCardState extends State<CompCard> {
                     ),
                     Text(
                       widget.subtitle,
-                      style:const TextStyle(
+                      style: const TextStyle(
                         color: Colors.grey,
                         fontWeight: FontWeight.w400,
                         fontFamily: 'Quicksand',
@@ -81,7 +73,7 @@ class _CompCardState extends State<CompCard> {
               ),
             ),
             GestureDetector(
-              child:  SizedBox(
+              child: SizedBox(
                 width: 60,
                 height: 80,
                 child: Icon(
@@ -89,11 +81,19 @@ class _CompCardState extends State<CompCard> {
                   size: 25,
                 ),
               ),
-              onTap: (){
-                setState(() {
-                  icons = Icons.done;
-                  userData.add({'name': widget.title,'image': widget.imagepath , 'subtitle': widget.subtitle});
-                });
+              onTap: () {
+                setState(
+                  () {
+                    icons = Icons.done;
+                    userData.add(
+                      {
+                        'name': widget.title,
+                        'image': widget.imagepath,
+                        'subtitle': widget.subtitle
+                      },
+                    );
+                  },
+                );
               },
             ),
           ],

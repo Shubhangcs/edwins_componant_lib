@@ -29,7 +29,6 @@ class _ComponantAddState extends State<ComponantAdd> {
       data = res;
     });
   }
-
   var compbody = {"name": emailController.text, "items": userData};
 
   void uploadData() async {
@@ -95,58 +94,63 @@ class _ComponantAddState extends State<ComponantAdd> {
                 itemCount: data.length,
               ),
             ),
-            Row(
-              children: [
-                GestureDetector(
-                  child: Container(
-                    margin: const EdgeInsets.only(top: 15, left: 20),
-                    height: 55,
-                    width: 300,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: const Color.fromARGB(173, 0, 0, 0),
+            Expanded(
+              child: Row(
+                children: [
+                  Expanded(
+                    child: GestureDetector(
+                      child: Container(
+                        margin: const EdgeInsets.only(top: 6, left: 20),
+                        height: 55,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: const Color.fromARGB(173, 0, 0, 0),
+                        ),
+                        child: const Center(
+                          child: Text(
+                            'Borrow',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontFamily: 'Quicksand',
+                              fontSize: 20,
+                            ),
+                          ),
+                        ),
+                      ),
+                      onTap: () {
+                        setState(() {
+                          uploadData();
+                          userData.clear();
+                          icons = Icons.add_rounded;
+                        });
+                      },
                     ),
-                    child: const Center(
-                      child: Text(
-                        'Borrow',
-                        style: TextStyle(
+                  ),
+                  GestureDetector(
+                    child: Container(
+                      margin: const EdgeInsets.only(top: 6, left: 10 , right: 15),
+                      height: 55,
+                      width: 55,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: const Color.fromARGB(173, 0, 0, 0),
+                      ),
+                      child: const Center(
+                        child: Icon(
+                          Icons.restart_alt_outlined,
                           color: Colors.white,
-                          fontFamily: 'Quicksand',
-                          fontSize: 20,
                         ),
                       ),
                     ),
+                    onTap: () {
+                      setState(() {
+                        userData.clear();
+                        icons = Icons.add_rounded;
+                      });
+                    },
                   ),
-                  onTap: () {
-                    setState(() {
-                      uploadData();
-                    });
-                  },
-                ),
-                GestureDetector(
-                  child: Container(
-                    margin: const EdgeInsets.only(top: 15, left: 10),
-                    height: 55,
-                    width: 50,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: const Color.fromARGB(173, 0, 0, 0),
-                    ),
-                    child: const Center(
-                      child: Icon(
-                        Icons.restart_alt_outlined,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                  onTap: () {
-                    setState(() {
-                      userData.clear();
-                      icons = Icons.add_rounded;
-                    });
-                  },
-                ),
-              ],
+                ],
+              ),
             ),
           ],
         ),

@@ -7,12 +7,12 @@ const UserData = require('./routes/user_componants_router');
 const MaterialsRout = require('./routes/material_router');
 const app = express();
 app.use(cors({
-    origin:"http://localhost:56136"
+    origin:"http://localhost:56324"
 }))
 app.use(body_parser.json());
-app.use('/' , UserRoute);
-app.use('/main',CompRouter);
+app.use('/auth' , UserRoute);
+app.use('/components',CompRouter);
 app.use('/comp',UserData)
-app.use('/mat',MaterialsRout)
+app.use('/materials',MaterialsRout);
 
 module.exports = app;

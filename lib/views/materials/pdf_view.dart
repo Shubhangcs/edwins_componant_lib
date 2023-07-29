@@ -4,7 +4,8 @@ import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
 class PdfView extends StatefulWidget {
   final String link;
-  const PdfView({super.key, required this.link});
+  final String title;
+  const PdfView({super.key, required this.link , required this.title});
 
   @override
   State<PdfView> createState() => _PdfViewState();
@@ -21,9 +22,9 @@ class _PdfViewState extends State<PdfView> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 10,
-        title:const Text(
-          "Python",
-          style: TextStyle(color: Colors.black),
+        title: Text(
+          widget.title,
+          style:const TextStyle(color: Colors.black),
         ),
         leading: GestureDetector(
           child:const Icon(

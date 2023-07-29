@@ -96,8 +96,8 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
               ),
               SizedBox(
-                height: 100,
-                child: Lottie.asset('assets/animation_lkmu1fn9.json')
+                height: 200,
+                child: Lottie.asset('assets/animation_lko1atef.json')
               ),
               Container(
                 margin: const EdgeInsets.only(top: 30, left: 30, right: 30),

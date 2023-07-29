@@ -38,30 +38,28 @@ class _MaterialMainState extends State<MaterialMain> {
         child: Column(
           children: [
             const TopNav(title: 'Materials'),
-            Container(
-              child: Expanded(
-                  child: ListView.builder(
-                itemBuilder: (context, index) {
-                  return GestureDetector(
-                    child:  CardModel(
-                        title: books[index]['name'],
-                        subtitle: books[index]['name'],
-                        imagepath: "assets/1489798288.png"),
-                    onTap: () {
-                      setState(() {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => PdfView(link: books[index]['link']),
-                          ),
-                        );
-                      });
-                    },
-                  );
-                },
-                itemCount: books.length,
-              )),
-            ),
+            Expanded(
+                child: ListView.builder(
+              itemBuilder: (context, index) {
+                return GestureDetector(
+                  child:  CardModel(
+                      title: books[index]['name'],
+                      subtitle: books[index]['subtitle'],
+                      imagepath: "assets/1489798288.png"),
+                  onTap: () {
+                    setState(() {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => PdfView(link: books[index]['link'] , title: books[index]['name'],),
+                        ),
+                      );
+                    });
+                  },
+                );
+              },
+              itemCount: books.length,
+            )),
           ],
         ),
       )),

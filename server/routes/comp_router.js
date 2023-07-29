@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const compSchema = require('../models/componants');
 
 
-module.exports = rout.get('/componant', async (req, res) => {
+module.exports = rout.get('/getcomponent', async (req, res) => {
   try {
     const collection = db.collection('componants'); 
 
@@ -17,7 +17,7 @@ module.exports = rout.get('/componant', async (req, res) => {
 });
 
 
-module.exports = rout.post('/addcomp', (req, res) => {
+module.exports = rout.post('/addcomponent', (req, res) => {
   // Extract the list of items from the request body
   const { name , image , subtitle} =  req.body;
   const post =new compSchema({

@@ -1,5 +1,6 @@
 import 'package:edwins_componant_lib/widgets/top_nav.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart' as urllauncher;
 
 class ContactUs extends StatefulWidget {
   const ContactUs({super.key});
@@ -84,18 +85,29 @@ class _ContactUsState extends State<ContactUs> {
                             ),
                           ),
                         ),
-                        onTap: () {
-                          setState(() {
-                            var snackBar = const SnackBar(
-                              content: Text('PHONE : +91 8618245446', style: TextStyle(color: Colors.black),),
-                              backgroundColor: Colors.white,
-                              elevation: 10,
-                              behavior: SnackBarBehavior.floating,
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10))),
-                            );
-                            ScaffoldMessenger.of(context)
-                                .showSnackBar(snackBar);
-                          });
+                        onTap: () async {
+                          final Uri url =
+                              Uri(scheme: 'tel', path: '+91 861 824 5446');
+                          if (await urllauncher.canLaunchUrl(url)) {
+                            urllauncher.launchUrl(url);
+                          } else {
+                            setState(() {
+                              var snackBar = const SnackBar(
+                                content: Text(
+                                  'PHONE : +91 8618245446',
+                                  style: TextStyle(color: Colors.black),
+                                ),
+                                backgroundColor: Colors.white,
+                                elevation: 10,
+                                behavior: SnackBarBehavior.floating,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10))),
+                              );
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(snackBar);
+                            });
+                          }
                         },
                       )
                     ],

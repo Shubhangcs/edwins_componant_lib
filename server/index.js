@@ -7,9 +7,7 @@ const UserComponants = require('./models/user_componants');
 const MaterialModel = require('./models/materials');
 const port = 3000;
 
-app.use(cors({
-    origin:"http://localhost:62713",
-}));
+
 app.listen(port , ()=>{
     console.log('Server is startd...');
 });

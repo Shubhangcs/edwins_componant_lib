@@ -4,7 +4,7 @@ const db = require('../config/db');
 const mongoose = require('mongoose');
 const userComp = require('../models/user_componants');
 
-module.exports = route.post('/usercomp', (req, res) => {
+module.exports = route.post('/addusercomponents', (req, res) => {
   const { name ,items} =  req.body;
   const post =new userComp({
     name,
@@ -20,7 +20,7 @@ module.exports = route.post('/usercomp', (req, res) => {
   }
 });
 
-module.exports = route.get('/userdata' ,  async(req , res) => {
+module.exports = route.get('/getuserdata' ,  async(req , res) => {
     try {
       const data = db.collection('usercomps');
       const col = await data.find().toArray();

@@ -59,7 +59,10 @@ class _LoginPageState extends State<LoginPage> {
         setState(
           () {
             var snackBar = SnackBar(
-              content: const Text('User doesn\'t exist' , style: TextStyle(color: Colors.black),),
+              content: const Text(
+                'User doesn\'t exist',
+                style: TextStyle(color: Colors.black),
+              ),
               action: SnackBarAction(
                 label: 'Register',
                 onPressed: () {
@@ -73,8 +76,8 @@ class _LoginPageState extends State<LoginPage> {
               backgroundColor: Colors.white,
               elevation: 10,
               behavior: SnackBarBehavior.floating,
-              shape:const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(10))),
+              shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(10))),
             );
             ScaffoldMessenger.of(context).showSnackBar(snackBar);
           },
@@ -108,10 +111,9 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
               SizedBox(
-                width: double.infinity,
-                height: 300,
-                child: LottieBuilder.asset('assets/animation_lkmufejq.json')
-              ),
+                  width: double.infinity,
+                  height: 300,
+                  child: LottieBuilder.asset('assets/animation_lko0y083.json')),
               Container(
                 margin: const EdgeInsets.only(top: 30, left: 30, right: 30),
                 child: TextField(
@@ -150,22 +152,25 @@ class _LoginPageState extends State<LoginPage> {
               const SizedBox(
                 height: 10,
               ),
-              Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                const Text('Don\'t have account '),
-                GestureDetector(
-                  child: const Text(
-                    'Register',
-                    style: TextStyle(color: Colors.blue),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text('Don\'t have account '),
+                  GestureDetector(
+                    child: const Text(
+                      'Register',
+                      style: TextStyle(color: Colors.blue),
+                    ),
+                    onTap: () {
+                      Navigator.pop(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const RegisterPage()),
+                      );
+                    },
                   ),
-                  onTap: () {
-                    Navigator.pop(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const RegisterPage()),
-                    );
-                  },
-                )
-              ])
+                ],
+              )
             ],
           ),
         ),
