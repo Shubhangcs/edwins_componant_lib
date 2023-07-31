@@ -30,7 +30,6 @@ class TopNav extends StatelessWidget {
                     ),
                     onTap: () {
                       userData.clear();
-                      icons = Icons.add_rounded;
                       Navigator.pop(
                         context,
                         MaterialPageRoute(

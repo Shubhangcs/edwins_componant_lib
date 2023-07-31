@@ -55,7 +55,6 @@ class _ComponantAddState extends State<ComponantAdd> {
       });
     } else {
       setState(() {
-        icons = Icons.add_rounded;
         userData.clear();
         var snackBar = const SnackBar(
           content: Text(
@@ -121,7 +120,6 @@ class _ComponantAddState extends State<ComponantAdd> {
                         setState(() {
                           uploadData();
                           userData.clear();
-                          icons = Icons.add_rounded;
                         });
                       },
                     ),
@@ -144,8 +142,20 @@ class _ComponantAddState extends State<ComponantAdd> {
                     ),
                     onTap: () {
                       setState(() {
+                        var snackBar = const SnackBar(
+                      content: Text(
+                        'Reset Successful...',
+                        style: TextStyle(color: Colors.black),
+                      ),
+                      duration: Duration(milliseconds: 500),
+                      backgroundColor: Colors.white,
+                      elevation: 10,
+                      behavior: SnackBarBehavior.floating,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(10))),
+                    );
+                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
                         userData.clear();
-                        icons = Icons.add_rounded;
                       });
                     },
                   ),

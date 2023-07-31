@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 
 List userData = [];
 
-var icons = Icons.add_rounded;
-
 class CompCard extends StatefulWidget {
   final String title;
   final String subtitle;
@@ -73,18 +71,30 @@ class _CompCardState extends State<CompCard> {
               ),
             ),
             GestureDetector(
-              child: SizedBox(
+              child: const SizedBox(
                 width: 60,
                 height: 80,
                 child: Icon(
-                  icons,
+                  Icons.add_rounded,
                   size: 25,
                 ),
               ),
               onTap: () {
                 setState(
                   () {
-                    icons = Icons.done;
+                    var snackBar =  SnackBar(
+                      content: Text(
+                        'Total items added ${userData.length + 1}',
+                        style:const TextStyle(color: Colors.black),
+                      ),
+                      duration:const Duration(milliseconds: 500),
+                      backgroundColor: Colors.white,
+                      elevation: 10,
+                      behavior: SnackBarBehavior.floating,
+                      shape:const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(10))),
+                    );
+                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
                     userData.add(
                       {
                         'name': widget.title,
