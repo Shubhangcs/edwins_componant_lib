@@ -7,7 +7,7 @@ const UserData = require('./routes/user_componants_router');
 const MaterialsRout = require('./routes/material_router');
 const app = express();
 app.use(cors({
-    origin:"http://localhost:56324"
+    origin:"http://localhost:56074"
 }))
 app.use(body_parser.json());
 app.use('/auth' , UserRoute);

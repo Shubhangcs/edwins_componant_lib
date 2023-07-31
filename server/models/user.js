@@ -37,5 +37,6 @@ userSchema.pre('save',async function(){
 
 });
 
+
 const UserModel = db.model('User' , userSchema);
 module.exports =UserModel;

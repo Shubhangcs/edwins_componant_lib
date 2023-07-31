@@ -9,19 +9,23 @@ module.exports = router.get('/getmaterials',async(req,res)=>{
         const data = await collection.find().toArray();
         res.json(data);
     } catch (error) {
-        console.error('Failed to retrieve data from MongoDB:', error);
-        res.status(500).send('Failed to retrieve data from MongoDB');
+        res.json({status:false});
     }
 });
 
 module.exports = router.post('/addmaterials' ,(req,res)=>{
-    const {name , subtitle , link} = req.body;
-    const add = new MaterialSchema({
-        name,
-        subtitle,
-        link
-    })
-    add.save().then(savePost => {
-        res.json(savePost);
-    })
+
+    try {
+        const {name , subtitle , link} = req.body;
+        const add = new MaterialSchema({
+            name,
+            subtitle,
+            link
+        });
+        add.save().then(savePost => {
+            res.json(savePost);
+        })
+    } catch (error) {
+        res.json({status:false});
+    }
 });

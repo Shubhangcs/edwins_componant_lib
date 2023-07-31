@@ -27,8 +27,7 @@ module.exports = route.get('/getuserdata' ,  async(req , res) => {
       res.json(col);
       
     } catch (error) {
-      console.error('Failed to retrieve data from MongoDB:', error);
-      res.status(500).send('Failed to retrieve data from MongoDB');
+      res.json({status:false});
     }
 });
 

@@ -11,8 +11,7 @@ module.exports = rout.get('/getcomponent', async (req, res) => {
     const data = await collection.find().toArray();
     res.json(data);
   } catch (error) {
-    console.error('Failed to retrieve data from MongoDB:', error);
-    res.status(500).send('Failed to retrieve data from MongoDB');
+    
   }
 });
 
@@ -31,4 +30,13 @@ module.exports = rout.post('/addcomponent', (req, res) => {
   .catch(error => {
     res.status(500).json({ error: 'An error occurred' });
   });
+});
+
+module.exports = rout.post('/getcomponent/delete' ,async (req , res) => {
+    const name  = req.body;
+    console.log(name);
+    const collection =  db.collection('componants');
+
+    const data = await collection.deleteOne(name);
+    res.json(data);
 });
